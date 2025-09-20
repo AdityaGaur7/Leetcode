@@ -1,33 +1,22 @@
 class Solution {
 public:
     string reverseWords(string s) {
-        int n = s.size();
-        stack<string> st;
-        string x = "";
-        
-        for (int i = 0; i < n; ++i) {
-            if (s[i] == ' ') {
-                if (!x.empty()) {
-                    st.push(x);
-                    x = "";
-                }
-            } else {
-                x += s[i];
+       vector<string> words;
+        stringstream ss(s);
+        string word;
+        while(ss >> word){
+            words.push_back(word);
+        }
+
+        string rev = "";
+        for(int i = words.size()-1; i >= 0; --i){
+            rev += words[i];
+        // don't want to add a space at the end of the string
+            if(i > 0){
+                rev += " ";
             }
         }
-        
-        // Push the last word if any
-        if (!x.empty()) {
-            st.push(x);
-        }
-        
-        string ans = "";
-        while (!st.empty()) {
-            ans += st.top();
-            st.pop();
-            if (!st.empty()) ans += ' ';
-        }
-        
-        return ans;
+        return rev;
+
     }
 };
