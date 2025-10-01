@@ -19,14 +19,15 @@ public:
         q.push(root);
         while(!q.empty()){
            int s = q.size();
-
+   TreeNode* it=nullptr;
            for(int i=0;i<s;i++){
-             auto it = q.front();
+              it = q.front();
             q.pop();
-            if(i==s-1)v.push_back(it->val);
+            
             if(it->left)q.push(it->left);
             if(it->right)q.push(it->right);
            }
+           v.push_back(it->val);
            
         }
         return v;
