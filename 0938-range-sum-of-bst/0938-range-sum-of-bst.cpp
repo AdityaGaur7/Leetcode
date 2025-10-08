@@ -11,23 +11,16 @@
  */
 class Solution {
 public:
-void solve(TreeNode* root,vector<int>&ans){
- 
-if(!root)return;
-
-solve(root->left,ans);
-ans.push_back(root->val);
-solve(root->right,ans);
-
-
-}
     int rangeSumBST(TreeNode* root, int low, int high) {
-        vector<int>ans;
-        solve(root,ans);
-        int sum=0;
-       for(auto it:ans){
-        if(it>=low && it<=high)sum+=it;
-       }
-        return sum;
+        if (!root) {
+            return 0;
+        }
+        
+        int currentVal = (root->val >= low && root->val <= high) ? root->val : 0;
+        
+        int leftSum = rangeSumBST(root->left, low, high);
+        int rightSum = rangeSumBST(root->right, low, high);
+        
+        return currentVal + leftSum + rightSum;
     }
 };
